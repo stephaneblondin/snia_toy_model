@@ -962,21 +962,20 @@ if __name__ == '__main__':
         f.write('# (5) IGE mass fraction at t=0\n')
         f.write('# (6) 56Ni mass fraction at t=0\n')
         f.write('# (7) IME mass fraction\n')
-        f.write('# (8) Ti mass fraction\n')
-        f.write('# (9) unburnt CO mass fraction\n')
-        f.write('# (10) radius at zone center [cm] = velocity * time_since_explosion (homologous expansion)\n')
-        f.write('# (11) mean density over zone [g/cm^3] (*not* density at zone center)\n')
-        f.write('# (12) temperature [K]\n')
+        f.write('# (8) unburnt CO mass fraction\n')
+        f.write('# (9) radius at zone center [cm] = velocity * time_since_explosion (homologous expansion)\n')
+        f.write('# (10) mean density over zone [g/cm^3] (*not* density at zone center)\n')
+        f.write('# (11) temperature [K]\n')
         if (xfracti > 0.0):
             nxfraccols = nime + 19
         else:
             nxfraccols = nime + 18
-        f.write('# (13)-({:d}) mass fractions\n'.format(nxfraccols))
+        f.write('# (12)-({:d}) mass fractions\n'.format(nxfraccols -1))
         f.write('#\n')
         f.write('# NOTES ON MASS FRACTIONS: (14) X_Ni includes X_56Ni; (15) X_Co = X_56Co; (16) X_Fe includes 56Fe from 56Co decay\n')
         f.write('#\n')
         # Time-independent variables:
-        f.write('{:4s} {:10s} {:10s} {:10s} {:10s} {:10s} {:10s} {:10s} {:10s}'.format('#idx','vel[km/s]','dmass[Msun]','mass[Msun]','X_IGE0','X_56Ni0','X_IME','X_Ti','X_CO'))
+        f.write('{:4s} {:10s} {:10s} {:10s} {:10s} {:10s} {:10s} {:10s}'.format('#idx','vel[km/s]','dmass[Msun]','mass[Msun]','X_IGE0','X_56Ni0','X_IME','X_CO'))
         # Time-dependent variables:
         f.write(' {:10s} {:10s} {:10s}'.format('rad[cm]','dens[gcc]','temp[K]'))
         # Time-dependent abundances:
@@ -991,7 +990,7 @@ if __name__ == '__main__':
         f.write('{:4s} {:10s} {:10s} {:10s}'.format('#(1)','(2)','(3)','(4)'))
         f.write(' {:10s} {:10s} {:10s} {:10s} {:10s}'.format('(5)','(6)','(7)','(8)','(9)'))
         f.write(' {:10s} {:10s} {:10s}'.format('(10)','(11)','(12)'))
-        f.write(' {:10s} {:10s} {:10s} {:10s}'.format('(13)','(14)','(15)','(16)'))
+        f.write(' {:10s} {:10s} {:10s}'.format('(13)','(14)','(15)'))
         idxcol = 16
         if (xfracti > 0.0):
             idxcol += 1
@@ -1005,7 +1004,7 @@ if __name__ == '__main__':
         ### model
         for i in range(nd):
             f.write('{:4d} {:.4e} {:.4e} {:.4e}'.format(i+1, vel[i], dmass[i], mass[i]))
-            f.write(' {:.4e} {:.4e} {:.4e} {:.4e} {:.4e}'.format(xige[i], xni56_old[i], xime[i], xti[i], xunbco[i]))
+            f.write(' {:.4e} {:.4e} {:.4e} {:.4e}'.format(xige[i], xni56_old[i], xime[i], xunbco[i]))
             f.write(' {:.4e} {:.4e} {:.4e}'.format(rad[i], dens[i], temp[i]))
             f.write(' {:.4e} {:.4e} {:.4e} {:.4e}'.format(xni56[i], xni[i], xco[i], xfe[i]))
             if (xfracti > 0.0):
